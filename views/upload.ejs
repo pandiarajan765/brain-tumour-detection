@@ -1,0 +1,121 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+  <div class="col-md-9 col-lg-8 col-xl-7">
+    <div class="card shadow-md border-0 mt-2 mb-4">
+      <div class="card-header py-3 text-center">
+        <h4 class="mb-0 fw-bold text-white d-flex align-items-center justify-content-center gap-2">
+          <i class="fas fa-microscope" style="color: #14b8a6;"></i>
+          <span>Upload MRI Scan & Process</span>
+        </h4>
+      </div>
+
+      <div class="card-body p-4 p-md-5">
+        <form action="/scan/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+          <!-- Patient / User Details -->
+          <div class="card patient-info-card p-3 mb-4">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fas fa-user-circle text-teal fs-5" style="color: #14b8a6;"></i>
+              <h6 class="fw-bold text-dark mb-0">Patient Information</h6>
+              <span class="badge bg-teal-subtle text-teal ms-auto extra-small" style="background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+                <i class="fas fa-shield-alt me-1"></i> Auto-Generated User ID
+              </span>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-7">
+                <label class="form-label fw-bold text-secondary extra-small mb-1">
+                  Patient / User Name <span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light text-muted"><i class="fas fa-user"></i></span>
+                  <input type="text" name="userName" class="form-control" placeholder="Enter patient full name" 
+                         value="<%= (typeof user !== 'undefined' && user) ? user.name : '' %>" required>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <label class="form-label fw-bold text-secondary extra-small mb-1">
+                  Age (Years) <span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light text-muted"><i class="fas fa-calendar-alt"></i></span>
+                  <input type="number" name="age" class="form-control" placeholder="e.g. 45" min="1" max="120" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- File Input Drop Zone -->
+          <div class="mb-4">
+            <label class="form-label fw-bold text-secondary d-flex justify-content-between align-items-center">
+              <span>Patient MRI Image File <span class="text-danger">*</span></span>
+              <span class="extra-small text-muted" style="font-size: 0.8rem;">Formats: JPEG, PNG, JPG</span>
+            </label>
+
+            <div class="dropzone-box p-4 p-md-5 text-center cursor-pointer position-relative" id="dropZone">
+              <input type="file" name="mriImage" class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" 
+                     accept="image/*" required id="mriInput" style="z-index: 5;">
+              <div class="py-2" id="dropZoneContent">
+                <div class="stat-icon-wrapper bg-teal-subtle text-teal mx-auto mb-3" style="width: 64px; height: 64px; background-color: rgba(20, 184, 166, 0.12) !important; color: #14b8a6 !important; font-size: 1.8rem;">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-1">Drag & Drop MRI image here</h5>
+                <p class="text-muted small mb-0">or click to select file from your computer</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- File Metadata & Preview Area -->
+          <div class="mb-4" id="previewContainer" style="display:none;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="form-label fw-bold text-secondary mb-0">Selected Scan Preview</span>
+              <div id="fileMetaInfo"></div>
+            </div>
+            <div class="position-relative text-center p-3 border rounded-3 bg-light">
+              <img id="preview" src="#" class="img-fluid rounded shadow-sm max-h-72" style="max-height: 280px; object-fit: contain;">
+              <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-3 rounded-circle d-flex align-items-center justify-content-center" 
+                      id="removePreviewBtn" style="width: 34px; height: 34px; padding: 0;" title="Remove file">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Diagnostic Engine: DIP Algorithm -->
+          <input type="hidden" name="detectionMethod" value="dip">
+          <div class="card p-3 mb-4 border rounded-3 bg-light">
+            <div class="d-flex align-items-center gap-3">
+              <div class="stat-icon-wrapper bg-teal-subtle text-teal flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.25rem; background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+                <i class="fas fa-layer-group"></i>
+              </div>
+              <div class="flex-grow-1">
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="fw-bold text-dark">Digital Image Processing (DIP) Engine</span>
+                  <span class="badge bg-teal-subtle text-teal border border-teal-subtle extra-small" style="background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">Active</span>
+                </div>
+                <p class="extra-small text-muted mb-0 mt-1">
+                  Automated Otsu thresholding, Gaussian noise filtering, skull-stripping ROI mask & morphological contour segmentation.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Description / Clinical Notes -->
+          <div class="mb-4">
+            <label class="form-label fw-bold text-secondary">Clinical Notes / Scan Remarks</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light align-items-start pt-2"><i class="fas fa-notes-medical text-muted"></i></span>
+              <textarea name="description" class="form-control" rows="2" placeholder="Add patient symptoms, scan sequence (T1/T2/FLAIR), or clinical context..."></textarea>
+            </div>
+          </div>
+          
+          <!-- Action Submit Button -->
+          <button type="submit" class="btn btn-primary btn-lg w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2 shadow-md">
+            <i class="fas fa-microscope"></i>
+            <span>Upload and Analyze Scan</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

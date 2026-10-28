@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-10-01T10:59:00.000Z" agent="Antigravity AI" version="21.0.0" type="device">
+  <diagram id="FlowDiagram" name="Flow Diagram (DFD)">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Data Flow Diagram (DFD) - Brain Tumour Detector" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="200" y="30" width="420" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- External Entity -->
+        <mxCell id="user" value="User" style="rectangle;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Processes -->
+        <mxCell id="p1" value="1.0&#xa;Login" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="290" y="130" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2" value="2.0&#xa;Upload Scan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="290" y="240" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3" value="3.0&#xa;Process Image" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="490" y="240" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4" value="4.0&#xa;Generate Report" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="290" y="370" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Data Stores -->
+        <mxCell id="d1" value="D1: User DB" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;top=0;left=0;right=1;bottom=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="145" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d2" value="D2: Image Storage" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;top=0;left=0;right=1;bottom=0;" vertex="1" parent="1">
+          <mxGeometry x="670" y="255" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d3" value="D3: Result DB" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;top=0;left=0;right=1;bottom=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="385" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors -->
+        <mxCell id="f1" value="Login Details" edge="1" parent="1" source="user" target="p1" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" />
+        <mxCell id="f2" value="Verify User" edge="1" parent="1" source="p1" target="d1" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+
+        <mxCell id="f3" value="MRI Image" edge="1" parent="1" source="user" target="p2" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="f4" value="Image Data" edge="1" parent="1" source="p2" target="p3" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+
+        <mxCell id="f5" value="Save Scan" edge="1" parent="1" source="p3" target="d2" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="f6" value="Save Results" edge="1" parent="1" source="p3" target="d3" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" />
+
+        <mxCell id="f7" value="Request Report" edge="1" parent="1" source="user" target="p4" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" />
+        <mxCell id="f8" value="Fetch Result" edge="1" parent="1" source="p4" target="d3" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

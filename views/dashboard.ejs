@@ -1,0 +1,151 @@
+<%- include('partials/header') %>
+
+<!-- Welcome Hero Banner with Mesh Gradient -->
+<div class="card hero-gradient-card shadow-lg border-0 mb-4 text-white overflow-hidden position-relative" style="border-radius: 1.5rem;">
+  <div class="card-body p-4 p-md-5 z-1 position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="d-inline-flex align-items-center gap-2 bg-teal-subtle text-teal px-3 py-1.5 rounded-pill mb-3 border border-teal-subtle" style="background: rgba(20, 184, 166, 0.15); border-color: rgba(20, 184, 166, 0.3) !important;">
+          <i class="fas fa-microscope" style="color: #14b8a6;"></i>
+          <span class="fw-bold extra-small text-white" style="font-size: 0.85rem;">Digital Image Processing (DIP) Engine</span>
+        </div>
+        <h1 class="display-6 fw-extrabold mb-2 text-white">Welcome back, <%= user.name %>! 👋</h1>
+        <p class="fs-6 text-light opacity-90 mb-0 leading-relaxed max-w-2xl">
+          Automated Brain Tumour Detection & Analysis System powered by advanced Digital Image Processing (DIP).
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <a href="/scan/upload" class="btn btn-light btn-lg fw-bold px-4 py-3 shadow-md d-inline-flex align-items-center gap-2" style="color: #0f766e; border-radius: 0.875rem;">
+          <i class="fas fa-cloud-upload-alt fs-5"></i>
+          <span>Start New Analysis</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Performance & Quick Access Stat Cards Grid -->
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm border-0 p-3">
+      <div class="card-body p-2 d-flex align-items-center gap-3">
+        <div class="stat-icon-wrapper bg-primary-subtle text-primary" style="background-color: rgba(13, 148, 136, 0.12) !important; color: #0d9488 !important;">
+          <i class="fas fa-upload"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold mb-1 text-dark">Upload MRI Scan</h6>
+          <p class="text-secondary extra-small mb-2" style="font-size: 0.825rem;">JPEG / PNG Brain MRI analysis</p>
+          <a href="/scan/upload" class="btn btn-outline-primary btn-sm px-3 py-1">Upload Scan &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm border-0 p-3">
+      <div class="card-body p-2 d-flex align-items-center gap-3">
+        <div class="stat-icon-wrapper bg-success-subtle text-success">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold mb-1 text-dark">Detection Results</h6>
+          <p class="text-secondary extra-small mb-2" style="font-size: 0.825rem;">Classification & anomaly area</p>
+          <a href="/scan/results" class="btn btn-outline-success btn-sm px-3 py-1">View Results &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm border-0 p-3">
+      <div class="card-body p-2 d-flex align-items-center gap-3">
+        <div class="stat-icon-wrapper bg-info-subtle text-info">
+          <i class="fas fa-file-medical-alt"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold mb-1 text-dark">Medical Reports</h6>
+          <p class="text-secondary extra-small mb-2" style="font-size: 0.825rem;">Full diagnostic summaries</p>
+          <a href="/report" class="btn btn-outline-info btn-sm px-3 py-1">View Reports &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project Overview & How It Works Section -->
+<div class="row g-4 mb-4">
+  <!-- System Features -->
+  <div class="col-lg-6">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="stat-icon-wrapper bg-primary-subtle text-primary" style="width: 44px; height: 44px; font-size: 1.2rem;">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h5 class="fw-bold text-dark mb-0">Platform Capabilities</h5>
+        </div>
+        <p class="text-secondary leading-relaxed mb-3">
+          The <strong>Brain Tumour Detection System</strong> provides rapid diagnostic assistance to medical professionals by analyzing brain MRI scans through digital image processing (DIP) and morphological contour analysis.
+        </p>
+        <div class="row g-2">
+          <div class="col-6">
+            <div class="p-3 border rounded-3 bg-light h-100">
+              <i class="fas fa-bullseye text-primary mb-2 fs-5"></i>
+              <h6 class="fw-bold text-dark mb-1 small">High Precision</h6>
+              <p class="text-muted extra-small mb-0" style="font-size: 0.775rem;">Adaptive thresholding & skull-stripping segmentation.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-3 border rounded-3 bg-light h-100">
+              <i class="fas fa-layer-group text-success mb-2 fs-5"></i>
+              <h6 class="fw-bold text-dark mb-1 small">DIP Segmentation</h6>
+              <p class="text-muted extra-small mb-0" style="font-size: 0.775rem;">Otsu thresholding & contour area estimation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Use Timeline -->
+  <div class="col-lg-6">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="stat-icon-wrapper bg-success-subtle text-success" style="width: 44px; height: 44px; font-size: 1.2rem;">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <h5 class="fw-bold text-dark mb-0">Workflow Steps</h5>
+        </div>
+
+        <div class="d-flex flex-column gap-3">
+          <div class="d-flex align-items-start gap-3">
+            <span class="badge rounded-circle bg-primary text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 30px; height: 30px;">1</span>
+            <div>
+              <h6 class="fw-bold text-dark mb-1 small">Upload Patient MRI Scan</h6>
+              <p class="text-secondary extra-small mb-0" style="font-size: 0.8rem;">Drop JPEG or PNG brain MRI images into the upload area.</p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3">
+            <span class="badge rounded-circle bg-primary text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 30px; height: 30px;">2</span>
+            <div>
+              <h6 class="fw-bold text-dark mb-1 small">Execute DIP Analysis</h6>
+              <p class="text-secondary extra-small mb-0" style="font-size: 0.8rem;">Process scan using Otsu thresholding, Gaussian filtering & contour analysis.</p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3">
+            <span class="badge rounded-circle bg-primary text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 30px; height: 30px;">3</span>
+            <div>
+              <h6 class="fw-bold text-dark mb-1 small">Inspect Diagnosis & Report</h6>
+              <p class="text-secondary extra-small mb-0" style="font-size: 0.8rem;">Review confidence score, tumour size, location, and severity level.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

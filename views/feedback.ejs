@@ -1,0 +1,269 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid px-0">
+  <!-- Page Header -->
+  <div class="mb-4">
+    <h2 class="fw-bold text-dark mb-1">
+      <i class="fas fa-comment-alt-lines me-2 text-primary"></i>Feedback Form
+    </h2>
+    <p class="text-secondary mb-0">Help us improve the Brain Tumour Diagnostic and Segmentation Service</p>
+  </div>
+
+  <!-- Feedback Template Form Card -->
+  <form action="/feedback" method="POST" id="feedbackForm">
+    <div class="feedback-template-card">
+      
+      <!-- Top Row: Last Name & Phone Number -->
+      <div class="row g-0 template-header-row border-bottom">
+        <div class="col-md-6 d-flex align-items-center template-col border-end border-bottom border-bottom-md-0">
+          <label for="lastName" class="template-label me-2 mb-0">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" class="form-control template-input" placeholder="[Last Name]" value="<%= typeof defaultLastName !== 'undefined' ? defaultLastName : '' %>" required>
+        </div>
+        <div class="col-md-6 d-flex align-items-center template-col">
+          <label for="phone" class="template-label me-2 mb-0">Phone number:</label>
+          <input type="tel" id="phone" name="phone" class="form-control template-input" placeholder="[Phone number]" value="<%= typeof defaultPhone !== 'undefined' ? defaultPhone : '' %>" required>
+        </div>
+      </div>
+
+      <!-- Rating Prompt Bar -->
+      <div class="template-subbar d-flex flex-wrap justify-content-between align-items-center border-bottom">
+        <div class="template-subbar-title">
+          Please rate your satisfaction with Brain Tumour Diagnostic Service:
+        </div>
+        <div class="template-subbar-hint mt-1 mt-sm-0">
+          Type 'X' in box <span class="template-sample-box">X</span>
+        </div>
+      </div>
+
+      <!-- 5-Point Visual Emoji Rating Scale -->
+      <div class="template-rating-section">
+        <div class="row text-center g-0 mb-1">
+          <!-- 1: Highly unsatisfied -->
+          <div class="col rating-col" data-rating="1" tabindex="0" role="button" aria-label="1 - Highly unsatisfied">
+            <div class="rating-emoji-wrap">
+              <svg class="rating-emoji-svg" viewBox="0 0 54 54" width="54" height="54">
+                <circle cx="27" cy="27" r="23" fill="#1e2433" stroke="#64748b" stroke-width="2"/>
+                <circle cx="18" cy="20" r="3" fill="#ffffff"/>
+                <circle cx="36" cy="20" r="3" fill="#ffffff"/>
+                <path d="M 19 37 Q 27 27 35 37 C 35 43 19 43 19 37 Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div class="rating-label">Highly unsatisfied</div>
+          </div>
+
+          <!-- 2: Unsatisfied -->
+          <div class="col rating-col" data-rating="2" tabindex="0" role="button" aria-label="2 - Unsatisfied">
+            <div class="rating-emoji-wrap">
+              <svg class="rating-emoji-svg" viewBox="0 0 54 54" width="54" height="54">
+                <circle cx="27" cy="27" r="23" fill="#1e2433" stroke="#64748b" stroke-width="2"/>
+                <circle cx="18" cy="21" r="3" fill="#ffffff"/>
+                <circle cx="36" cy="21" r="3" fill="#ffffff"/>
+                <path d="M 18 36 Q 27 27 36 36" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="rating-label">Unsatisfied</div>
+          </div>
+
+          <!-- 3: Neutral -->
+          <div class="col rating-col" data-rating="3" tabindex="0" role="button" aria-label="3 - Neutral">
+            <div class="rating-emoji-wrap">
+              <svg class="rating-emoji-svg" viewBox="0 0 54 54" width="54" height="54">
+                <circle cx="27" cy="27" r="23" fill="#1e2433" stroke="#64748b" stroke-width="2"/>
+                <circle cx="18" cy="21" r="3" fill="#ffffff"/>
+                <circle cx="36" cy="21" r="3" fill="#ffffff"/>
+                <line x1="18" y1="33" x2="36" y2="33" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="rating-label">Neutral</div>
+          </div>
+
+          <!-- 4: Satisfied -->
+          <div class="col rating-col" data-rating="4" tabindex="0" role="button" aria-label="4 - Satisfied">
+            <div class="rating-emoji-wrap">
+              <svg class="rating-emoji-svg" viewBox="0 0 54 54" width="54" height="54">
+                <circle cx="27" cy="27" r="23" fill="#1e2433" stroke="#64748b" stroke-width="2"/>
+                <circle cx="18" cy="21" r="3" fill="#ffffff"/>
+                <circle cx="36" cy="21" r="3" fill="#ffffff"/>
+                <path d="M 18 30 Q 27 39 36 30" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="rating-label">Satisfied</div>
+          </div>
+
+          <!-- 5: Very satisfied -->
+          <div class="col rating-col active" data-rating="5" tabindex="0" role="button" aria-label="5 - Very satisfied">
+            <div class="rating-emoji-wrap">
+              <svg class="rating-emoji-svg" viewBox="0 0 54 54" width="54" height="54">
+                <circle cx="27" cy="27" r="23" fill="#1e2433" stroke="#64748b" stroke-width="2"/>
+                <circle cx="18" cy="20" r="3" fill="#ffffff"/>
+                <circle cx="36" cy="20" r="3" fill="#ffffff"/>
+                <path d="M 16 28 Q 27 28 38 28 C 38 41 16 41 16 28 Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div class="rating-label">Very satisfied</div>
+          </div>
+        </div>
+
+        <!-- Horizontal Stepper Line with Square Checkbox Boxes -->
+        <div class="rating-boxes-track">
+          <div class="rating-stepper-line"></div>
+          <div class="row text-center g-0">
+            <div class="col">
+              <div class="rating-box" id="box-1" data-rating="1"></div>
+            </div>
+            <div class="col">
+              <div class="rating-box" id="box-2" data-rating="2"></div>
+            </div>
+            <div class="col">
+              <div class="rating-box" id="box-3" data-rating="3"></div>
+            </div>
+            <div class="col">
+              <div class="rating-box" id="box-4" data-rating="4"></div>
+            </div>
+            <div class="col">
+              <div class="rating-box selected" id="box-5" data-rating="5">X</div>
+            </div>
+          </div>
+        </div>
+
+        <input type="hidden" name="rating" id="ratingInput" value="5" required>
+      </div>
+
+      <!-- Feedback Comments Subbar -->
+      <div class="template-subbar border-top border-bottom">
+        <div class="template-subbar-title">
+          Please put your feedback below:
+        </div>
+      </div>
+
+      <!-- Textarea Box -->
+      <div class="p-4">
+        <textarea name="comments" id="comments" rows="5" class="form-control template-textarea" placeholder="Type your feedback, clinical observations, or suggestions here..." required></textarea>
+      </div>
+
+    </div>
+
+    <!-- Submit Action Button -->
+    <div class="d-flex justify-content-end mb-5">
+      <button type="submit" class="btn btn-primary px-4 py-2.5 fw-bold shadow-sm" style="border-radius: 8px; font-size: 1rem; background-color: #0d9488 !important; border-color: #0d9488 !important;">
+        <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+      </button>
+    </div>
+  </form>
+
+  <!-- History & Past Reviews Section -->
+  <div class="pt-2">
+    <h4 class="fw-bold mb-3 text-secondary">
+      <i class="fas fa-history me-2"></i>Previous Feedbacks & Responses
+    </h4>
+    
+    <% if(feedbacks && feedbacks.length > 0){ %>
+      <div class="row">
+        <% feedbacks.forEach(f => { %>
+          <div class="col-md-6 mb-3">
+            <div class="card shadow-sm border-0 h-100" style="border-radius: 1rem;">
+              <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-light text-primary fw-bold d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px;">
+                      <%= f.lastName ? f.lastName.charAt(0).toUpperCase() : (typeof user !== 'undefined' && user && user.name ? user.name.charAt(0).toUpperCase() : 'P') %>
+                    </div>
+                    <div>
+                      <strong class="text-dark"><%= f.lastName ? f.lastName : (typeof user !== 'undefined' && user && user.name ? user.name : 'Patient') %></strong>
+                      <% if(f.phone) { %>
+                        <span class="text-muted small ms-2"><i class="fas fa-phone-alt me-1"></i><%= f.phone %></span>
+                      <% } %>
+                    </div>
+                  </div>
+                  <div class="text-warning">
+                    <% for(let i=0; i<5; i++) { %>
+                      <i class="fa<%= i < f.rating ? 's' : 'r' %> fa-star"></i>
+                    <% } %>
+                  </div>
+                </div>
+                <p class="text-secondary mb-3 flex-grow-1"><%= f.comments %></p>
+                <div class="text-muted small mb-2">
+                  <i class="far fa-clock me-1"></i><%= new Date(f.createdAt).toLocaleDateString() %>
+                </div>
+                <% if(f.adminResponse){ %>
+                  <div class="p-3 bg-light border-start border-primary border-3 rounded-end mt-auto">
+                    <div class="d-flex align-items-center mb-1">
+                      <i class="fas fa-user-md text-primary me-2"></i>
+                      <span class="fw-bold text-dark small">Clinical Team Response</span>
+                    </div>
+                    <p class="mb-0 text-secondary small"><%= f.adminResponse %></p>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="card shadow-sm border-0 text-center py-5" style="border-radius: 1rem;">
+        <div class="card-body">
+          <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 2.5rem;"></i>
+          <p class="text-muted mb-0">No feedback submitted yet. Share your thoughts using the template form above!</p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const ratingInput = document.getElementById('ratingInput');
+  const ratingCols = document.querySelectorAll('.rating-col');
+  const ratingBoxes = document.querySelectorAll('.rating-box');
+
+  function setRating(val) {
+    const valStr = String(val);
+    if (ratingInput) ratingInput.value = valStr;
+
+    ratingCols.forEach(col => {
+      const colRating = col.getAttribute('data-rating');
+      if (colRating === valStr) {
+        col.classList.add('active');
+      } else {
+        col.classList.remove('active');
+      }
+    });
+
+    ratingBoxes.forEach(box => {
+      const boxRating = box.getAttribute('data-rating');
+      if (boxRating === valStr) {
+        box.classList.add('selected');
+        box.textContent = 'X';
+      } else {
+        box.classList.remove('selected');
+        box.textContent = '';
+      }
+    });
+  }
+
+  ratingCols.forEach(col => {
+    col.addEventListener('click', function() {
+      const val = this.getAttribute('data-rating');
+      setRating(val);
+    });
+
+    col.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key.toLowerCase() === 'x') {
+        e.preventDefault();
+        const val = this.getAttribute('data-rating');
+        setRating(val);
+      }
+    });
+  });
+
+  ratingBoxes.forEach(box => {
+    box.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const val = this.getAttribute('data-rating');
+      setRating(val);
+    });
+  });
+});
+</script>
+
+<%- include('partials/footer') %>

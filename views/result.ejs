@@ -1,0 +1,297 @@
+<%- include('partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h2 class="fw-extrabold text-dark mb-1 d-flex align-items-center gap-2">
+      <i class="fas fa-poll text-teal" style="color: #14b8a6;"></i>
+      <span>Detection Results & Analytics</span>
+    </h2>
+    <p class="text-muted small mb-0">Diagnostic summaries, segmented tumour features, and confidence metrics.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <% if(typeof report !== 'undefined' && report){ %>
+      <button onclick="window.print()" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5">
+        <i class="fas fa-print"></i> Print Report
+      </button>
+    <% } %>
+    <a href="/scan/upload" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 shadow-sm">
+      <i class="fas fa-plus"></i> New Analysis
+    </a>
+  </div>
+</div>
+
+<% if(typeof report !== 'undefined' && report){ %>
+<div class="card shadow-md border-0 mb-4 overflow-hidden">
+  <div class="card-header py-3 text-white d-flex align-items-center justify-content-between">
+    <h5 class="mb-0 fw-bold d-flex align-items-center gap-2">
+      <i class="fas fa-file-medical-alt" style="color: #14b8a6;"></i>
+      <span>Detailed Diagnostic Report</span>
+    </h5>
+    <span class="badge bg-teal-subtle text-teal border border-teal-subtle" style="background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+      <i class="fas fa-clock me-1"></i><%= new Date(report.createdAt || Date.now()).toLocaleDateString() %>
+    </span>
+  </div>
+
+  <div class="card-body p-4">
+    <!-- Patient Identity Card -->
+    <div class="card patient-info-card p-3 mb-4">
+      <div class="row align-items-center g-3">
+        <div class="col-md-4 d-flex align-items-center gap-3">
+          <div class="stat-icon-wrapper bg-teal-subtle text-teal" style="width: 48px; height: 48px; font-size: 1.4rem; background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div>
+            <span class="text-secondary extra-small fw-semibold d-block">PATIENT / USER NAME</span>
+            <h5 class="fw-bold text-dark mb-0"><%= report.patientName || (report.resultId && report.resultId.patientName) || ((report.resultId && report.resultId.processId) ? report.resultId.processId.patientName : 'N/A') %></h5>
+          </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-center gap-3">
+          <div class="stat-icon-wrapper bg-primary-subtle text-primary" style="width: 48px; height: 48px; font-size: 1.4rem; background-color: rgba(13, 148, 136, 0.15) !important; color: #0d9488 !important;">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div>
+            <span class="text-secondary extra-small fw-semibold d-block">PATIENT AGE</span>
+            <h5 class="fw-bold text-dark mb-0"><%= report.patientAge || (report.resultId && report.resultId.patientAge) || ((report.resultId && report.resultId.processId) ? report.resultId.processId.patientAge : 'N/A') %> <span class="fs-6 fw-normal text-muted">Years</span></h5>
+          </div>
+        </div>
+        <div class="col-md-5 d-flex align-items-center justify-content-md-end gap-2">
+          <div>
+            <span class="text-secondary extra-small fw-semibold d-block text-md-end mb-1">GENERATED USER ID</span>
+            <div class="patient-id-badge">
+              <i class="fas fa-id-card"></i>
+              <span><%= report.patientId || (report.resultId && report.resultId.patientId) || ((report.resultId && report.resultId.processId) ? report.resultId.processId.generatedUserId : 'N/A') %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Scan Inspection Panel -->
+    <% if(report.resultId && (report.resultId.processedImagePath || (report.resultId.processId && report.resultId.processId.originalImage))){ %>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="card p-3 border rounded-3 bg-light text-center h-100">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <span class="text-secondary extra-small fw-bold text-uppercase"><i class="fas fa-file-image me-1 text-teal" style="color: #14b8a6;"></i> Original MRI Scan</span>
+            <span class="badge bg-secondary-subtle text-secondary extra-small">Input</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-center bg-dark rounded-2 p-2" style="min-height: 220px;">
+            <img src="/<%= (report.resultId.processId && report.resultId.processId.originalImage) ? report.resultId.processId.originalImage.replace(/\\/g, '/') : '' %>" 
+                 alt="Original MRI" class="img-fluid rounded shadow-sm" style="max-height: 240px; object-fit: contain;">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 border rounded-3 bg-light text-center h-100">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <span class="text-secondary extra-small fw-bold text-uppercase"><i class="fas fa-microscope me-1 text-teal" style="color: #14b8a6;"></i> DIP Segmented ROI</span>
+            <span class="badge bg-teal-subtle text-teal border border-teal-subtle extra-small" style="background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+              <%= report.resultId.tumourDetected ? report.resultId.tumourType + ' (' + report.resultId.confidenceScore + '%)' : 'Normal Tissue' %>
+            </span>
+          </div>
+          <div class="d-flex align-items-center justify-content-center bg-dark rounded-2 p-2" style="min-height: 220px;">
+            <img src="/<%= report.resultId.processedImagePath ? report.resultId.processedImagePath.replace(/\\/g, '/') : (report.resultId.processId ? report.resultId.processId.originalImage.replace(/\\/g, '/') : '') %>" 
+                 alt="DIP Segmented MRI" class="img-fluid rounded shadow-sm" style="max-height: 240px; object-fit: contain;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Findings and Recommendations Callouts -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="p-3.5 border rounded-3 bg-light h-100">
+          <h6 class="fw-bold text-dark mb-2 d-flex align-items-center gap-2">
+            <i class="fas fa-search-location text-teal" style="color: #14b8a6;"></i> Clinical Findings
+          </h6>
+          <p class="text-secondary mb-0 leading-relaxed small"><%= report.findings %></p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="p-3.5 border rounded-3 bg-light h-100">
+          <h6 class="fw-bold text-dark mb-2 d-flex align-items-center gap-2">
+            <i class="fas fa-user-md text-teal" style="color: #14b8a6;"></i> Recommendations
+          </h6>
+          <p class="text-secondary mb-0 leading-relaxed small"><%= report.recommendations %></p>
+        </div>
+      </div>
+    </div>
+    
+    <% if(report.resultId){ %>
+    <!-- Metrics Table -->
+    <div class="table-responsive border rounded-3 overflow-hidden">
+      <table class="table table-hover align-middle mb-0">
+        <tbody>
+          <tr>
+            <th class="w-30 text-secondary fw-bold bg-light ps-4">Generated User ID</th>
+            <td class="ps-4">
+              <span class="patient-id-badge">
+                <i class="fas fa-id-card"></i>
+                <%= report.patientId || report.resultId.patientId || ((report.resultId.processId) ? report.resultId.processId.generatedUserId : 'N/A') %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Patient / User Name</th>
+            <td class="ps-4 fw-bold text-dark">
+              <i class="fas fa-user text-teal me-2" style="color: #14b8a6;"></i>
+              <%= report.patientName || report.resultId.patientName || ((report.resultId.processId) ? report.resultId.processId.patientName : 'N/A') %>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Patient Age</th>
+            <td class="ps-4 text-dark fw-semibold">
+              <%= report.patientAge || report.resultId.patientAge || ((report.resultId.processId) ? report.resultId.processId.patientAge : 'N/A') %> Years
+            </td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Detection Engine</th>
+            <td class="ps-4">
+              <span class="badge bg-dark text-white px-3 py-2">
+                <i class="fas fa-microscope me-1 text-teal" style="color: #14b8a6;"></i> <%= report.resultId.detectionMethod || 'DIP Algorithm' %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Tumour Status</th>
+            <td class="ps-4">
+              <% if(report.resultId.tumourDetected){ %>
+                <span class="badge bg-danger text-white px-3 py-2"><i class="fas fa-exclamation-triangle me-1"></i> YES - Tumour Detected</span>
+              <% } else { %>
+                <span class="badge bg-success text-white px-3 py-2"><i class="fas fa-check-circle me-1"></i> NO - Normal Tissue</span>
+              <% } %>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Tumour Type</th>
+            <td class="ps-4 fw-bold text-dark"><%= report.resultId.tumourType || 'N/A' %></td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Estimated Size</th>
+            <td class="ps-4 text-dark fw-semibold"><%= report.resultId.tumourSize ? Number(report.resultId.tumourSize).toFixed(1) + ' mm' : '0 mm' %></td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Location Region</th>
+            <td class="ps-4 text-dark"><%= report.resultId.tumourLocation || 'N/A' %></td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Confidence / Accuracy</th>
+            <td class="ps-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="text-dark fw-extrabold"><%= report.resultId.confidenceScore %>%</span>
+                <div class="progress flex-grow-1 max-w-xs" style="height: 8px; max-width: 200px;">
+                  <div class="progress-bar" role="progressbar" style="width: <%= report.resultId.confidenceScore %>%"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-secondary fw-bold bg-light ps-4">Severity Level</th>
+            <td class="ps-4">
+              <% if(report.resultId.severityLevel === 'High'){ %>
+                <span class="badge bg-danger px-3 py-2">High Severity</span>
+              <% } else if(report.resultId.severityLevel === 'Medium') { %>
+                <span class="badge bg-warning text-dark px-3 py-2">Medium Severity</span>
+              <% } else { %>
+                <span class="badge bg-success px-3 py-2">Low / Normal</span>
+              <% } %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>
+
+<!-- Scans History Table -->
+<div class="card shadow-sm border-0 mb-4 overflow-hidden">
+  <div class="card-header py-3 bg-dark text-white d-flex align-items-center justify-content-between">
+    <h5 class="mb-0 fw-bold d-flex align-items-center gap-2">
+      <i class="fas fa-history" style="color: #14b8a6;"></i>
+      <span>Recent Analysis History</span>
+    </h5>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-dark text-uppercase extra-small">
+          <tr>
+            <th class="ps-4">Generated ID</th>
+            <th>Patient / User</th>
+            <th>Age</th>
+            <th>Scan File</th>
+            <th>Engine</th>
+            <th>Status</th>
+            <th>Class Type</th>
+            <th>Size</th>
+            <th>Confidence</th>
+            <th>Severity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(results && results.length > 0){ %>
+            <% results.forEach(r => { %>
+            <tr>
+              <td class="ps-4">
+                <span class="badge bg-teal-subtle text-teal border border-teal-subtle font-monospace" style="background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+                  <%= r.patientId || (r.processId && r.processId.generatedUserId) || 'N/A' %>
+                </span>
+              </td>
+              <td class="fw-bold text-dark">
+                <i class="fas fa-user-circle me-1 text-teal" style="color: #14b8a6;"></i>
+                <%= r.patientName || (r.processId && r.processId.patientName) || 'Patient' %>
+              </td>
+              <td class="text-secondary fw-semibold">
+                <%= (r.patientAge || (r.processId && r.processId.patientAge)) ? (r.patientAge || r.processId.patientAge) + ' yrs' : 'N/A' %>
+              </td>
+              <td class="fw-semibold text-dark">
+                <i class="fas fa-file-image me-1 text-muted"></i>
+                <%= (r.processId && r.processId.originalImage) ? r.processId.originalImage.split(/[\\/]/).pop() : 'Scan.jpg' %>
+              </td>
+              <td>
+                <span class="badge bg-teal-subtle text-teal border border-teal-subtle px-2.5 py-1.5" style="background-color: rgba(20, 184, 166, 0.15) !important; color: #14b8a6 !important;">
+                  <i class="fas fa-layer-group me-1"></i> DIP Engine
+                </span>
+              </td>
+              <td>
+                <% if(r.tumourDetected){ %>
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2.5 py-1.5"><i class="fas fa-exclamation-triangle me-1"></i> POSITIVE</span>
+                <% } else { %>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5"><i class="fas fa-check-circle me-1"></i> NEGATIVE</span>
+                <% } %>
+              </td>
+              <td class="fw-bold text-dark"><%= r.tumourType || 'None' %></td>
+              <td><%= r.tumourSize ? Number(r.tumourSize).toFixed(1) + ' mm' : '0 mm' %></td>
+              <td>
+                <span class="fw-extrabold text-teal" style="color: #14b8a6;"><%= r.confidenceScore %>%</span>
+              </td>
+              <td>
+                <% if(r.severityLevel === 'High'){ %>
+                  <span class="badge bg-danger px-2.5 py-1.5">High</span>
+                <% } else if(r.severityLevel === 'Medium') { %>
+                  <span class="badge bg-warning text-dark px-2.5 py-1.5">Medium</span>
+                <% } else { %>
+                  <span class="badge bg-success px-2.5 py-1.5">Low</span>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+          <% } else if(typeof report === 'undefined') { %>
+            <tr>
+              <td colspan="10" class="text-center py-5 text-muted">
+                <i class="fas fa-folder-open mb-3 text-muted" style="font-size: 3rem;"></i>
+                <p class="mb-0">No analysis results available yet. <a href="/scan/upload" class="fw-bold text-teal" style="color: #14b8a6;">Upload a scan to begin</a>.</p>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brain Tumour Detector</title>
+
+  <!-- Google Fonts with cross-browser system fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core CSS (Self-hosted for guaranteed cross-browser reliability & offline support) -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/fontawesome/css/all.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/theme.css" rel="stylesheet">
+
+  <script>
+    (function() {
+      // Unify default theme across all browsers: default to 'dark' for medical diagnostic interface
+      const savedTheme = localStorage.getItem('theme');
+      const theme = savedTheme || 'dark';
+      document.documentElement.setAttribute('data-bs-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+<div class="main-wrapper">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/dashboard">
+      <i class="fas fa-brain me-2 brand-icon-glow" style="color: #14b8a6; font-size: 1.6rem;"></i>
+      <span class="fw-extrabold text-white">Brain<span style="color: #14b8a6;">Tumour</span> Detector</span>
+    </a>
+
+    <% if (user) { %>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav ms-auto align-items-center gap-1">
+          <a class="nav-link" href="/dashboard"><i class="fas fa-home me-1"></i> Home</a>
+          <a class="nav-link" href="/scan/upload"><i class="fas fa-cloud-upload-alt me-1"></i> Upload</a>
+          <a class="nav-link" href="/scan/results"><i class="fas fa-chart-pie me-1"></i> Results</a>
+          <a class="nav-link" href="/report"><i class="fas fa-file-medical me-1"></i> Reports</a>
+          <a class="nav-link" href="/feedback"><i class="fas fa-comment-alt me-1"></i> Feedback</a>
+          <% if(user.role==='admin'){ %>
+            <a class="nav-link text-warning fw-semibold" href="/admin"><i class="fas fa-user-shield me-1"></i> Admin</a>
+          <% } %>
+          <div class="vr d-none d-lg-block mx-2 text-secondary opacity-50" style="height: 24px;"></div>
+          <span class="user-pill-badge d-inline-flex align-items-center me-2">
+            <i class="fas fa-user-circle me-1.5" style="color: #14b8a6;"></i><%= user.name %>
+          </span>
+          <a class="btn btn-outline-danger btn-sm px-3" href="/logout"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+          <button class="btn btn-outline-light btn-sm ms-lg-2 my-1 my-lg-0 theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Switch to light mode" title="Switch to Light Mode">
+            <i class="fas fa-sun me-1 text-warning" id="themeToggleIcon"></i>
+            <span id="themeToggleText" class="d-lg-inline">Light</span>
+          </button>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="d-flex align-items-center ms-auto">
+        <button class="btn btn-outline-light btn-sm theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Switch to light mode" title="Switch to Light Mode">
+          <i class="fas fa-sun me-1 text-warning" id="themeToggleIcon"></i>
+          <span id="themeToggleText">Light</span>
+        </button>
+      </div>
+    <% } %>
+  </div>
+</nav>
+
+<div class="container mt-4 pb-4">
+<% if(success){ %><div class="alert alert-success alert-dismissible fade show shadow-sm border-0"><i class="fas fa-check-circle me-2"></i><%= success %><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div><% } %>
+<% if(error){ %><div class="alert alert-danger alert-dismissible fade show shadow-sm border-0"><i class="fas fa-exclamation-triangle me-2"></i><%= error %><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div><% } %>

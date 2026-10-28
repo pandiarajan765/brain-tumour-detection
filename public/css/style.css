@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Base & Cross-Browser Normalization Styles
+   Ensures identical layout, typography, and contrast across all browsers
+   (Chrome, Edge, Brave, Firefox, Safari, Opera)
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Prevent Cross-Browser Visited Link Color Glitches --- */
+a, a:hover, a:focus, a:visited {
+  text-decoration: none;
+}
+
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:focus,
+.navbar-brand:visited,
+.navbar-brand:active {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-weight: 800;
+}
+
+/* --- Cross-Browser Input Autofill Normalization --- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--input-bg, #0f172a) inset !important;
+  -webkit-text-fill-color: var(--text-dark, #f8fafc) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* --- Guaranteed Essential Utility Fallbacks --- */
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-teal {
+  color: #14b8a6 !important;
+}
+
+.bg-teal-subtle {
+  background-color: rgba(20, 184, 166, 0.15) !important;
+}
+
+.border-teal-subtle {
+  border-color: rgba(20, 184, 166, 0.3) !important;
+}
+
+.extra-small {
+  font-size: 0.8125rem;
+}
+
+.card {
+  border-radius: 1.25rem;
+}

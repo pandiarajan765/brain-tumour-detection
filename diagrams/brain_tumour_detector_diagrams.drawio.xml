@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-10-01T10:59:00.000Z" agent="Antigravity AI" version="21.0.0" type="device">
+  <diagram id="ActivityDiagram" name="Activity Diagram">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Activity Diagram - Brain Tumour Detector" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="230" y="30" width="360" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="395" y="90" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act1" value="Login to System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="340" y="160" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act2" value="Upload MRI Image" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="340" y="240" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dec_mode" value="Select Engine?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="345" y="320" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_ai" value="AI Model Analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="230" y="420" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_dip" value="DIP Analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="460" y="420" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_save" value="Save Result to Database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="330" y="510" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_view" value="Display Diagnosis Result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="330" y="590" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_report" value="Download Report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="340" y="670" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="end" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="395" y="750" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" edge="1" parent="1" source="start" target="act1" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="e2" edge="1" parent="1" source="act1" target="act2" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="e3" edge="1" parent="1" source="act2" target="dec_mode" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        
+        <mxCell id="e4" value="AI Mode" edge="1" parent="1" source="dec_mode" target="act_ai" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" />
+        <mxCell id="e5" value="DIP Mode" edge="1" parent="1" source="dec_mode" target="act_dip" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" />
+        
+        <mxCell id="e6" edge="1" parent="1" source="act_ai" target="act_save" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" />
+        <mxCell id="e7" edge="1" parent="1" source="act_dip" target="act_save" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" />
+        
+        <mxCell id="e8" edge="1" parent="1" source="act_save" target="act_view" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="e9" edge="1" parent="1" source="act_view" target="act_report" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="e10" edge="1" parent="1" source="act_report" target="end" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="FlowDiagram" name="Flow Diagram (DFD)">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title2" value="Data Flow Diagram (DFD) - Brain Tumour Detector" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="200" y="30" width="420" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="user" value="User" style="rectangle;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p1" value="1.0&#xa;Login" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="290" y="130" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2" value="2.0&#xa;Upload Scan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="290" y="240" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3" value="3.0&#xa;Process Image" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="490" y="240" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4" value="4.0&#xa;Generate Report" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="290" y="370" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d1" value="D1: User DB" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;top=0;left=0;right=1;bottom=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="145" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d2" value="D2: Image Storage" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontStyle=1;fontColor=#000000;top=0;left=0;right=1;bottom=0;" vertex="1" parent="1">
+          <mxGeometry x="670" y="255" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d3" value="D3: Result DB" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;top=0;left=0;right=1;bottom=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="385" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f1" value="Login Details" edge="1" parent="1" source="user" target="p1" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" />
+        <mxCell id="f2" value="Verify User" edge="1" parent="1" source="p1" target="d1" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="f3" value="MRI Image" edge="1" parent="1" source="user" target="p2" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="f4" value="Image Data" edge="1" parent="1" source="p2" target="p3" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="f5" value="Save Scan" edge="1" parent="1" source="p3" target="d2" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+        <mxCell id="f6" value="Save Results" edge="1" parent="1" source="p3" target="d3" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" />
+        <mxCell id="f7" value="Request Report" edge="1" parent="1" source="user" target="p4" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" />
+        <mxCell id="f8" value="Fetch Result" edge="1" parent="1" source="p4" target="d3" style="strokeColor=#000000;strokeWidth=1.5;endArrow=classic;" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="CommunicationDiagram" name="Communication Diagram">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title3" value="Communication Diagram - Brain Tumour Detector" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="220" y="30" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="obj_user" value=":User" style="rectangle;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#000000;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="240" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="obj_server" value=":Web Server" style="rectangle;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#000000;align=center;" vertex="1" parent="1">
+          <mxGeometry x="360" y="140" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="obj_python" value=":Python Engine" style="rectangle;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#000000;align=center;" vertex="1" parent="1">
+          <mxGeometry x="360" y="340" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="obj_db" value=":Database" style="rectangle;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#000000;align=center;" vertex="1" parent="1">
+          <mxGeometry x="620" y="240" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l1" value="" style="endArrow=none;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1" source="obj_user" target="obj_server">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="1: Login()&#xa;2: UploadScan()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="190" y="165" width="120" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l2" value="" style="endArrow=none;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1" source="obj_server" target="obj_python">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="3: ProcessImage()&#xa;4: ReturnResult()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="440" y="240" width="110" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l3" value="" style="endArrow=none;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1" source="obj_server" target="obj_db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="5: SaveResult()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="510" y="165" width="110" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l4" value="" style="endArrow=none;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1" source="obj_user" target="obj_python">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l5" value="" style="endArrow=none;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1" source="obj_user" target="obj_db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="6: ViewResult()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="350" y="275" width="110" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

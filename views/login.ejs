@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center mt-3 mt-md-4 mb-5">
+  <div class="col-lg-10 col-xl-9">
+    <div class="card shadow-lg border-0 overflow-hidden" style="border-radius: 1.5rem;">
+      <div class="row g-0 auth-card-row">
+        <!-- Left Side: Modern Medical Gradient Overlay -->
+        <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center position-relative text-white hero-gradient-card auth-card-col-left" 
+             style="background: linear-gradient(135deg, #070d19 0%, #0f172a 50%, #0f766e 100%); min-height: 480px;">
+          <div class="position-relative text-center p-5 z-1">
+            <div class="stat-icon-wrapper bg-white-10 mx-auto mb-3" style="width: 72px; height: 72px; background: rgba(255,255,255,0.1); border-radius: 1.25rem;">
+              <i class="fas fa-brain brand-icon-glow" style="color: #14b8a6; font-size: 2.2rem;"></i>
+            </div>
+            <h1 class="display-6 fw-extrabold mb-2 text-white">Brain Tumour Detection</h1>
+            <p class="fs-6 text-light opacity-90 mb-0">Using MRI Scan Image</p>
+          </div>
+        </div>
+        
+        <!-- Right Side: Login Form -->
+        <div class="col-md-6 d-flex align-items-center auth-form-container auth-card-col-right">
+          <div class="card-body p-4 p-md-5 w-100">
+            <h2 class="fw-extrabold mb-1 auth-heading">Welcome Back 👋</h2>
+            <p class="text-muted mb-4 small">Please enter your details to sign in</p>
+            
+            <form action="/login" method="POST">
+              <div class="mb-3">
+                <label class="form-label text-secondary fw-bold extra-small">Email Address</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light text-muted"><i class="fas fa-envelope"></i></span>
+                  <input type="email" name="email" class="form-control bg-light" placeholder="name@domain.com" required>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label text-secondary fw-bold extra-small">Password</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light text-muted"><i class="fas fa-lock"></i></span>
+                  <input type="password" name="password" class="form-control bg-light" placeholder="••••••••" required>
+                  <button type="button" class="btn btn-outline-secondary toggle-password-btn" aria-label="Toggle password visibility">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 py-3 fw-bold shadow-md">
+                <span>Sign In to Portal</span>
+                <i class="fas fa-arrow-right ms-2"></i>
+              </button>
+            </form>
+            
+            <div class="text-center mt-4 pt-2">
+              <p class="text-muted small mb-0">
+                Don't have an account? 
+                <a href="/register" class="fw-bold text-teal" style="color: #14b8a6;">Register here</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
